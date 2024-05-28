@@ -32,7 +32,7 @@ const UploadAndPreview = ({updateData}) => {
     const formData = new FormData();
     formData.append("file", selectedFile);
     axios
-      .post("http://191.96.31.183:8083/idcard_recognition", formData, {
+      .post("http://89.116.159.229:8082/idcard_recognition", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -55,7 +55,7 @@ const UploadAndPreview = ({updateData}) => {
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     accept: "image/*" as unknown as Accept,
-  });
+  }); 
 
   return (
     <div className="flex flex-col items-center">
