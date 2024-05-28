@@ -35,7 +35,7 @@ const UploadAndPreview = ({updateData}) => {
       .post("http://191.96.31.183:8083/idcard_recognition", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
-        },
+        }
       })
       .then((data) => {
         console.log(data);

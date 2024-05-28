@@ -36,8 +36,8 @@ export default function Home() {
             </span>
           </div>
         </div>
-        <div className="w-6/12">
-          <table className="w-full">
+        <div className="w-6/12 p-3">
+          {/* <table className="w-full">
             <thead>
               <tr className="border-2 p-2">
                 <th>Field</th>
@@ -62,7 +62,17 @@ export default function Home() {
                 );
               })}
             </tbody>
-          </table>
+          </table>  */}
+          <ul>
+            {Object.keys(data).map((d) => {
+              if (typeof data[d] !== "string") return;
+              return (
+                <li>
+                  <span className="my-2 font-semibold">{d}</span> : <span className="text-sm">{data[d]}</span>
+                </li>
+              );
+            })}
+          </ul>
         </div>
         <div className="w-4/12 p-2">
           <table className="w-full">
