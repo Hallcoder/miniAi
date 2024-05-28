@@ -1,5 +1,5 @@
 import { useState, useCallback, useRef } from "react";
-import { useDropzone } from "react-dropzone";
+import { Accept, useDropzone } from "react-dropzone";
 import Image from "next/image";
 import axios from "axios";
 import CameraCaptureModal from "./cameraCaptureModal";
@@ -54,7 +54,7 @@ const UploadAndPreview = ({updateData}) => {
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
-    accept: "image/*",
+    accept: "image/*" as unknown as Accept,
   });
 
   return (
