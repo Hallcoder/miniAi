@@ -1,5 +1,5 @@
-import { HomeIcon } from '@heroicons/react/20/solid'
-
+import Image from 'next/image'
+import Logo from "../../public/assets/images/logo.jpg";
 const pages = [
   { name: 'Tools', href: '#', current: false },
   { name: 'Document analyzer', href: '#', current: true },
@@ -12,7 +12,8 @@ export default function Breadcrumb() {
         <li className="flex">
           <div className="flex items-center">
             <a href="#" className="text-primary font-bold hover:text-gray-500">
-              MiniAi
+                <Image src={Logo} width={60} className='h-5/6 ' alt='logo'/>
+              {/* MiniAi */}
               <span className="sr-only">Home</span>
             </a>
           </div>

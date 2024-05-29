@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Intro from "@/components/intro";
 import { ThreeDot } from "react-loading-indicators";
+import Tabs from "@/components/tabs";
 
 export default function Home() {
   const images = [image1, image2, image3, image4];
@@ -47,7 +48,7 @@ export default function Home() {
             </span>
           </div>
         </div>
-        <div className="w-4/12 p-3">
+        {/* <div className="w-4/12 p-3">
           {!isLoading ? (
             <ul>
               {Object.keys(data).map((d) => {
@@ -66,7 +67,7 @@ export default function Home() {
             </div>
           )}
           <div>
-            <p className="text-xs m-2">Processing time: 8.8s</p>
+            <p className="text-xs m">Processing time: 8.8s</p>
           </div>
         </div>
         <div className="w-4/12 p-2">
@@ -106,7 +107,9 @@ export default function Home() {
               </tr>
             </tbody>
           </table>
-        </div>
+        </div> */}
+        <Tabs data={data} isLoading={isLoading}/>
+        
         {/* <Intro /> */}
       </article>
     </main>
