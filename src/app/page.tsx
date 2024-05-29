@@ -22,7 +22,7 @@ export default function Home() {
         className="flex  w-full border"
         style={{
           background:
-            "linear-gradient(90deg, rgba(244,196,151,1) 0%, rgba(246,240,234,0.7289040616246498) 100%)",
+            "linear-gradient(48deg, rgba(212,202,200,1) 0%, rgba(255,255,255,1) 60%)",
         }}
       >
         <div className="flex flex-col items-center w-5/12">
