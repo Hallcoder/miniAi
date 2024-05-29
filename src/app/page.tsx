@@ -65,7 +65,9 @@ export default function Home() {
               <ThreeDot color="#cc5800" />
             </div>
           )}
-          <div></div>
+          <div>
+            <p className="text-xs m-2">Processing time: 8.8s</p>
+          </div>
         </div>
         <div className="w-4/12 p-2">
           <table className="w-full">
