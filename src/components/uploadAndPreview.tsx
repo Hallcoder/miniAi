@@ -90,7 +90,7 @@ const UploadAndPreview = ({ updateData, updateLoading }) => {
       setPreview(dataUrl);
 
       // Create a blob from the Data URL
-      const blob = await fetch(dataUrl).then((res) => res.blob());
+      const blob = await fetch(dataUrl as unknown as string).then((res) => res.blob());
       const file = new File([blob], "selected_image.png", { type: "image/png" });
       setSelectedFile(file);
     } catch (error) {
