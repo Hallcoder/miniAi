@@ -17,7 +17,7 @@ const UploadAndPreview = ({ updateData, updateLoading }) => {
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef(null);
   const images = [image1, image2, image3, image4];
-  
+
   const onDrop = useCallback((acceptedFiles) => {
     const file = acceptedFiles[0];
     if (file) {
@@ -25,7 +25,7 @@ const UploadAndPreview = ({ updateData, updateLoading }) => {
       setPreview(URL.createObjectURL(file));
     }
   }, []);
-  
+
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -40,6 +40,7 @@ const UploadAndPreview = ({ updateData, updateLoading }) => {
     if (!selectedFile) return;
     const formData = new FormData();
     formData.append("file", selectedFile);
+    console.log(formData.getAll("file"));
     axios
       .post(process.env.NEXT_PUBLIC_API_URL, formData, {
         headers: {
@@ -61,26 +62,48 @@ const UploadAndPreview = ({ updateData, updateLoading }) => {
   };
 
   const handleCapture = async (dataUrl) => {
+    console.log("DataUrl", dataUrl);
     const blob = await fetch(dataUrl).then((res) => res.blob());
     const file = new File([blob], "captured_image.png", { type: "image/png" });
     setSelectedFile(file);
+    console.log("Another file", file);
     setPreview(dataUrl);
+  };
+
+  const handleSampleClick = async (img) => {
+    try {
+      // Convert the imported image to a Data URL (base64)
+      const toDataURL = (url) =>
+        fetch(url)
+          .then((response) => response.blob())
+          .then(
+            (blob) =>
+              new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onloadend = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(blob);
+              })
+          );
+
+      const dataUrl = await toDataURL(img.src); // img.src for Next.js Image component
+      setPreview(dataUrl);
+
+      // Create a blob from the Data URL
+      const blob = await fetch(dataUrl).then((res) => res.blob());
+      const file = new File([blob], "selected_image.png", { type: "image/png" });
+      setSelectedFile(file);
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error('Failed to set image.');
+    }
   };
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     accept: "image/*" as unknown as Accept,
-    noClick: true, // Disable click triggering for useDropzone
+    noClick: false, // Disable click triggering for useDropzone
   });
-  const handleSampleClick = (img) => {
-    setPreview(img);
-    fetch(img)
-      .then(res => res.blob())
-      .then(blob => {
-        const file = new File([blob], "sample_image.png", { type: "image/png" });
-        setSelectedFile(file);
-      });
-  };
 
   return (
     <div className="flex flex-col items-center w-full">
@@ -187,22 +210,23 @@ const UploadAndPreview = ({ updateData, updateLoading }) => {
         </button>
       )}
       <div className="w-10/12">
-            <h2 className="font-semibold">Image samples</h2>
-            <span className="flex flex-wrap gap-1 mb-4 w-full">
-              {images.map((img) => {
-                return (
-                  <Image
-                    className="hover:border-2 hover:border-gray-900 rounded-md cursor-pointer object-contain"
-                    alt="social-image"
-                    height={100}
-                    width={80}
-                    onClick={() => handleSampleClick(img)}
-                    src={img}
-                  />
-                );
-              })}
-            </span>
-          </div>
+        <h2 className="font-semibold">Image samples</h2>
+        <span className="flex flex-wrap gap-1 mb-4 w-full">
+          {images.map((img, index) => {
+            return (
+              <Image
+                key={index}
+                className="hover:border-2 hover:border-gray-900 rounded-md cursor-pointer object-contain"
+                alt="sample-image"
+                height={100}
+                width={80}
+                onClick={() => handleSampleClick(img)}
+                src={img}
+              />
+            );
+          })}
+        </span>
+      </div>
       <CameraCaptureModal
         isOpen={modalIsOpen}
         onRequestClose={() => setModalIsOpen(false)}
