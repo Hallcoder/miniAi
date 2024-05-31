@@ -11,8 +11,8 @@ import image3 from "../../public/assets/images/image3.jpg";
 import image4 from "../../public/assets/images/image4.jpg";
 
 const UploadAndPreview = ({ updateData, updateLoading }) => {
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [preview, setPreview] = useState(null);
+  const [selectedFile, setSelectedFile] = useState<File>(null);
+  const [preview, setPreview] = useState<string | null>(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef(null);
@@ -42,7 +42,7 @@ const UploadAndPreview = ({ updateData, updateLoading }) => {
     formData.append("file", selectedFile);
     console.log(formData.getAll("file"));
     axios
-      .post(process.env.NEXT_PUBLIC_API_URL, formData, {
+      .post(process.env.NEXT_PUBLIC_API_URL!, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -87,15 +87,19 @@ const UploadAndPreview = ({ updateData, updateLoading }) => {
           );
 
       const dataUrl = await toDataURL(img.src); // img.src for Next.js Image component
-      setPreview(dataUrl);
+      setPreview(dataUrl as string);
 
       // Create a blob from the Data URL
-      const blob = await fetch(dataUrl as unknown as string).then((res) => res.blob());
-      const file = new File([blob], "selected_image.png", { type: "image/png" });
+      const blob = await fetch(dataUrl as unknown as string).then((res) =>
+        res.blob()
+      );
+      const file = new File([blob], "selected_image.png", {
+        type: "image/png",
+      });
       setSelectedFile(file);
     } catch (error) {
-      console.error('Error:', error);
-      toast.error('Failed to set image.');
+      console.error("Error:", error);
+      toast.error("Failed to set image.");
     }
   };
 
@@ -145,7 +149,7 @@ const UploadAndPreview = ({ updateData, updateLoading }) => {
       <div>
         <button
           type="button"
-          onClick={() => fileInputRef.current.click()}
+          onClick={() => fileInputRef.current!.click()}
           className="inline-flex items-center gap-x-2 rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
           <svg
