@@ -127,7 +127,7 @@ export default function Tabs({ data, isLoading }) {
           </nav>
         </div>
       </div>
-      <div className="mt-4 w-full">
+      <div className="mt w-full">
         {tabs.find((tab) => tab.name === activeTab).content}
       </div>
     </div>

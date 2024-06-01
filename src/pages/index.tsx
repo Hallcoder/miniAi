@@ -22,15 +22,6 @@ export default function Home() {
           "linear-gradient(48deg, rgba(212,202,200,1) 0%, rgba(255,255,255,1) 60%)",
         }}
       >
-        {/* <SideBarNavigation /> */}
-        <div className="flex flex-col items-center w-5/12">
-          <UploadAndPreview
-            updateData={setData}  
-            updateLoading={setIsDataUpdated}
-          />
-        </div>
-        <Tabs data={data} isLoading={isLoading}/>
-        
       </article>
     </main>
     </RecoilRoot>

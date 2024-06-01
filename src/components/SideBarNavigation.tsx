@@ -1,53 +1,110 @@
-import React, { useState } from 'react';
-import { Transition } from '@headlessui/react';
+import { ChevronRightIcon } from '@heroicons/react/20/solid';
+import {
+  DocumentIcon,
+  UsersIcon,
+} from '@heroicons/react/24/outline';
+import logo from "../../public/assets/images/logo.jpg";
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 
-const SideBarNavigation = () => {
-    const [isOpen, setIsOpen] = useState(false);
+const navigation = [
+  {
+    name: 'FaceSDK',
+    icon: UsersIcon,
+    current: false,
+    children: [
+      { name: 'Face Recognition', href: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/face-recognition` },
+      { name: 'Face Liveness Detection', href: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/face-liveness-detection` },
+      { name: 'Face Mask Detection', href: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/face-mask-detection` },
+      { name: 'Face Emotional Detection', href: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/face-emotional-detection` }
+    ]
+  },
+  {
+    name: 'IDSDK',
+    icon: DocumentIcon,
+    current: false,
+    children: [
+      { name: 'ID Card Recognition', href: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/id-card-recognition` },
+      { name: 'Credit Card Recognition', href: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/` },
+      { name: 'MRZ/Barcode Recognition', href: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/` }
+    ],
+  },
+];
 
-    return (
-        <div className="flex h-screen bg-gray-100">
-            <div className={`flex flex-col ${isOpen ? 'w-64' : 'w-16'} bg-white border-r transition-width duration-300`}>
-                <button
-                    className="flex items-center justify-center w-12 h-12 bg-gray-200 hover:bg-gray-300 focus:outline-none"
-                    onClick={() => setIsOpen(!isOpen)}
-                >
-                    <svg
-                        className={`w-6 h-6 text-gray-600 transition-transform duration-300 transform ${isOpen ? 'rotate-180' : 'rotate-0'}`}
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ');
+}
+
+export default function SideBarNavigation() {
+    const router = useRouter();
+    const goHome = () =>{
+        router.push({
+            pathname:process.env.NEXT_PUBLIC_FRONTEND_URL
+        })
+    }
+  return (
+    <div className="fixed top-0 left-0 bottom-0 h-screen flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
+      <div className="flex h-16 shrink-0 m-auto items-center">
+        <Link href="/"><Image
+          className="h-12 m-auto w-auto cursor-pointer"
+          src={logo}
+        //   onClick={goHome}
+          alt="Your Company"
+        /></Link>
+      </div>
+      <nav className="flex flex-1 flex-col">
+        <ul role="list" className="flex flex-1 flex-col gap-y-7">
+          <li>
+            <ul role="list" className="-mx-2 space-y-1">
+              {navigation.map((item) => (
+                <li key={item.name}>
+                  {!item.children ? (
+                    <a
+                      href={item.href}
+                      className={classNames(
+                        item.current ? 'bg-gray-50' : 'hover:bg-gray-50',
+                        'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold text-gray-700'
+                      )}
                     >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M19 9l-7 7-7-7"
-                        />
-                    </svg>
-                </button>
-                <Transition
-                    show={isOpen}
-                    enter="transition duration-300 ease-out"
-                    enterFrom="transform -translate-x-full"
-                    enterTo="transform translate-x-0"
-                    leave="transition duration-300 ease-out"
-                    leaveFrom="transform translate-x-0"
-                    leaveTo="transform -translate-x-full"
-                >
-                    <div className="flex flex-col flex-1 overflow-hidden">
-                        {/* Sidebar content */}
-                        <nav>
-                            <ul>
-                                <li className="p-4 hover:bg-gray-200">Item 1</li>
-                                <li className="p-4 hover:bg-gray-200">Item 2</li>
-                                <li className="p-4 hover:bg-gray-200">Item 3</li>
-                            </ul>
-                        </nav>
+                      <item.icon className="h-6 w-6 shrink-0 text-gray-400" aria-hidden="true" />
+                      {item.name}
+                    </a>
+                  ) : (
+                    <div>
+                      <div
+                        className={classNames(
+                          item.current ? 'bg-gray-50' : 'hover:bg-gray-50',
+                          'flex items-center w-full text-left rounded-md p-2 gap-x-3 text-sm leading-6 font-semibold text-gray-700'
+                        )}
+                      >
+                        <item.icon className="h-6 w-6 shrink-0 text-gray-400" aria-hidden="true" />
+                        {item.name}
+                    
+                      </div>
+                      <ul className="mt-1 px-2">
+                        {item.children.map((subItem) => (
+                          <li key={subItem.name}>
+                            <a
+                              href={subItem.href}
+                              className={classNames(
+                                subItem.current ? 'bg-gray-50' : 'hover:bg-gray-50',
+                                'block rounded-md py-2 pr-2 pl-9 text-sm leading-6 text-gray-700'
+                              )}
+                            >
+                              {subItem.name}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                </Transition>
-            </div>
-        </div>
-    );
-};
-
-export default SideBarNavigation;
+                  )}
+                </li>
+              ))}
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  );
+}

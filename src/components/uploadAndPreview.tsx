@@ -11,7 +11,7 @@ import image3 from "../../public/assets/images/image3.jpg";
 import image4 from "../../public/assets/images/image4.jpg";
 
 const UploadAndPreview = ({ updateData, updateLoading }) => {
-  const [selectedFile, setSelectedFile] = useState<File>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
