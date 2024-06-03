@@ -17,10 +17,10 @@ export default function Home() {
     <main className="flex flex-col items-center justify-between">
       <article
         className="flex  w-full border"
-        style={{
-          background:
-          "linear-gradient(48deg, rgba(212,202,200,1) 0%, rgba(255,255,255,1) 60%)",
-        }}
+        // style={{
+        //   background:
+        //   "linear-gradient(48deg, rgba(212,202,200,1) 0%, rgba(255,255,255,1) 60%)",
+        // }}
       >
       </article>
     </main>

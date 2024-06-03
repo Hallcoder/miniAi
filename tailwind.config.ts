@@ -20,6 +20,7 @@ const config = {
     extend: {
       colors: {
         primary: "#FF5000 ",
+        bgPlayground:"#F5F8FF"
       },
       keyframes: {
         "accordion-down": {

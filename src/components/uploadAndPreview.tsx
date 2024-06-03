@@ -67,8 +67,8 @@ const UploadAndPreview = ({ updateData, updateLoading }) => {
   };
 
   return (
-    <div className="flex flex-col p-2 justify-center items-center w-full h-5/6">
-      <div className="w-full h-4/6">
+    <div className="flex flex-col items-center w-full h-4/6">
+      <div className="w-full h-full flex justify-center">
         <DropZone
           preview={preview}
           setSelectedFile={setSelectedFile}
@@ -76,11 +76,11 @@ const UploadAndPreview = ({ updateData, updateLoading }) => {
           setPreview={setPreview}
         />
       </div>
-      <div className="h-1/6">
+      <div className="flex items-center w-8/12 mb-4">
         <button
           type="button"
           onClick={() => fileInputRef.current!.click()}
-          className="inline-flex items-center gap-x-2 rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          className="inline-flex justify-center items-center gap-x-2 rounded-md bg-primary px-3.5 py-2.5 text-xs font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 w-6/12 h-4/6"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -105,10 +105,10 @@ const UploadAndPreview = ({ updateData, updateLoading }) => {
           onChange={handleFileChange}
           style={{ display: "none" }}
         />
-        <button
+        {/* <button
           onClick={() => setModalIsOpen(true)}
           type="button"
-          className="inline-flex mx-1 items-center gap-x-2 rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          className="inline-flex text-center mx-1 items-center gap-x-2 rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 w-6/12"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -130,19 +130,19 @@ const UploadAndPreview = ({ updateData, updateLoading }) => {
             />
           </svg>
           Take Photo
-        </button>
-      </div>
+        </button> */}
       {isUploading ? (
         <ThreeDot color="#FF5000"/>
       ) : (
         <button
           onClick={() => handleFileSubmit()}
           type="button"
-          className="inline-flex items-center gap-x-2 my-2 rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          className="inline-flex justify-center items-center gap-x-2 my-2 rounded-md bg-primary px-3.5 py-2.5 text-xs font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 w-6/12 m-1 h-4/6"
         >
           Analyze Document
         </button>
       )}
+      </div>
       <ImageSamples
         images={images}
         setPreview={setPreview}

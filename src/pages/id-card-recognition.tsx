@@ -8,8 +8,8 @@ function IdCardRecognition() {
   });
   const [isLoading, setIsDataUpdated] = useState(false);
   return (
-    <main className="flex flex-col items-center justify-between">
-      <h1 className="font-semibold text-xl my-auto">IDSDK - ID Card Recognition</h1>
+    <main className="flex flex-col items-center justify-between bg-bgPlayground">
+    <span className="min-h-[8vh] p-2 mt-4 mb-4"><h1 className="font-semibold text-4xl flex items-center justify-center my-auto">IDSDK - ID Card Recognition</h1></span> 
       <article className="flex w-full border">
         <div className="flex flex-col items-center w-5/12">
           <UploadAndPreview
