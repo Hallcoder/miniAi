@@ -25,7 +25,7 @@ const FaceRecognition = () => {
  
 
   return (
-    <div className="p-4 w-full">
+    <div className="p-4 w-full bg-bgPlaygroundz">
       {/* Section 4: Content Area */}
       <h1 className="text-2xl font-semibold">Face Recognition</h1>
       <div className="flex gap-2 mt-10 w-full justify-between">

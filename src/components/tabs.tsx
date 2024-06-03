@@ -38,7 +38,7 @@ export default function Tabs({ data, isLoading }) {
 
   function ImagesComponent() {
     return <div className="w-full p-3">
-        Document: <Image
+       { Object.entries(data).length > 2 ? <span>Document: <Image
                     src={`data:image/jpeg;base64,${data["Images"]["Document"]}`}
                     alt="Preview"
                     width={200}
@@ -53,9 +53,7 @@ export default function Tabs({ data, isLoading }) {
                     height={50}
                     objectFit="contain"
                     className="rounded-sm m-2"
-                  />
-
-
+                  /></span>:<span></span>}
     </div>;
   }
 
@@ -64,7 +62,7 @@ export default function Tabs({ data, isLoading }) {
   
     return (
       <div className="max-w-full p-3 overflow-auto">
-        <pre className="whitespace-pre-wrap break-all bg-gray-100 p-4 rounded-md">
+        <pre className="whitespace-pre-wrap break-all p-4 rounded-md">
           {formattedJson}
         </pre>
       </div>

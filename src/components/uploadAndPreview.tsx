@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import axios from "axios";
 import CameraCaptureModal from "./cameraCaptureModal";
 import { ThreeDot } from "react-loading-indicators";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import image1 from "../../public/assets/images/image1.jpg";
 import image2 from "../../public/assets/images/image2.jpg";
 import image3 from "../../public/assets/images/image3.jpg";
@@ -29,7 +29,13 @@ const UploadAndPreview = ({ updateData, updateLoading }) => {
   const handleFileSubmit = () => {
     setIsUploading(true);
     updateLoading(true);
-    if (!selectedFile) return;
+    if (!selectedFile) {
+      setIsUploading(false);
+      updateLoading(false);
+      toast.error("Please Input image!");
+      console.log("awaa")
+      return;
+    };
     const formData = new FormData();
     formData.append("file", selectedFile);
     console.log(formData.getAll("file"));
@@ -68,6 +74,7 @@ const UploadAndPreview = ({ updateData, updateLoading }) => {
 
   return (
     <div className="flex flex-col items-center w-full h-4/6">
+      <Toaster />
       <div className="w-full h-full flex justify-center">
         <DropZone
           preview={preview}

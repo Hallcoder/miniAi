@@ -45,7 +45,7 @@ function DropZone({ preview, selectedFile, setSelectedFile, setPreview }) {
             alt="Preview"
             width={0}
             height={0}
-            objectFit="cover"
+            objectFit="contain"
             className="w-full m-auto rounded-sm"
           />
         </div>
