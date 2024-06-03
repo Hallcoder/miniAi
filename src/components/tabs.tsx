@@ -28,7 +28,7 @@ export default function Tabs({ data, isLoading }) {
             })}
           </ul>
         ) : (
-          <div className="flex items-center justify-center h-full">
+          <div className="flex items-center justify-center border-black h-screen">
             <ThreeDot color="#cc5800" />
           </div>
         )}
@@ -72,9 +72,9 @@ export default function Tabs({ data, isLoading }) {
   }
 
   const tabs = [
-    { name: 'Extracted Data', icon: DocumentChartBarIcon, content: <ExtractedDataComponent />, current: false },
+    { name: 'Extracted Data', icon: DocumentChartBarIcon, content: <ExtractedDataComponent />, current: true },
     { name: 'Images', icon: PhotoIcon, content: <ImagesComponent />, current: false },
-    { name: 'API Response', icon: GlobeAltIcon, content: <ApiResponseComponent />, current: true },
+    { name: 'API Response', icon: GlobeAltIcon, content: <ApiResponseComponent />, current: false },
   ];
 
   const [activeTab, setActiveTab] = useState(tabs.find((tab) => tab.current)!.name);

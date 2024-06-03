@@ -13,7 +13,6 @@ import image5 from "../../public/assets/images/faces/face5.jpg"
 import image6 from "../../public/assets/images/faces/face6.jpg"
 import image7 from "../../public/assets/images/faces/face7.jpg"
 import image8 from "../../public/assets/images/faces/face8.jpg"
-import toast from "react-hot-toast";
 
 
 const FaceRecognition = () => {
@@ -26,7 +25,7 @@ const FaceRecognition = () => {
  
 
   return (
-    <div className="p-4">
+    <div className="p-4 w-full">
       {/* Section 4: Content Area */}
       <h1 className="text-2xl font-semibold">Face Recognition</h1>
       <div className="flex gap-2 mt-10 w-full justify-between">
@@ -52,7 +51,7 @@ const FaceRecognition = () => {
         </div>
         <div className="ml-4 mt-20 w-4/12">
           <h2>Results</h2>
-          <span className="flex gap-2 p-1">
+         { <span className="flex gap-2 p-1">
             <Image
               src={sampleImage}
               alt="Image 2"
@@ -65,11 +64,11 @@ const FaceRecognition = () => {
               width={300}
               height={200}
             />
-          </span>
+          </span>}
         </div>
       </div>
-      <div className="mt-4">
-        <button className="bg-primary text-white px-4 py-2 rounded">
+      <div className="mt-4 w-full">
+        <button className="bg-primary text-white px-4 py-2 w-full rounded">
           Check Result
         </button>
       </div>

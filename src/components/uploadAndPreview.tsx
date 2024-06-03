@@ -1,6 +1,4 @@
-import { useState, useCallback, useRef } from "react";
-import { Accept, useDropzone } from "react-dropzone";
-import Image from "next/image";
+import { useState, useRef } from "react";
 import axios from "axios";
 import CameraCaptureModal from "./cameraCaptureModal";
 import { ThreeDot } from "react-loading-indicators";
@@ -36,11 +34,15 @@ const UploadAndPreview = ({ updateData, updateLoading }) => {
     formData.append("file", selectedFile);
     console.log(formData.getAll("file"));
     axios
-      .post(`${process.env.NEXT_PUBLIC_API_URL!}/idcard_recognition`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+      .post(
+        `${process.env.NEXT_PUBLIC_API_URL!}/idcard_recognition`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
       .then((data) => {
         console.log(data);
         updateData(data.data);
@@ -65,9 +67,16 @@ const UploadAndPreview = ({ updateData, updateLoading }) => {
   };
 
   return (
-    <div className="flex flex-col items-center w-full">
-      <DropZone preview={preview} setSelectedFile={setSelectedFile} selectedFile={selectedFile} setPreview={setPreview}/>
-      <div>
+    <div className="flex flex-col p-2 justify-center items-center w-full h-5/6">
+      <div className="w-full h-4/6">
+        <DropZone
+          preview={preview}
+          setSelectedFile={setSelectedFile}
+          selectedFile={selectedFile}
+          setPreview={setPreview}
+        />
+      </div>
+      <div className="h-1/6">
         <button
           type="button"
           onClick={() => fileInputRef.current!.click()}
@@ -124,7 +133,7 @@ const UploadAndPreview = ({ updateData, updateLoading }) => {
         </button>
       </div>
       {isUploading ? (
-        <ThreeDot color="#FF5000" />
+        <ThreeDot color="#FF5000"/>
       ) : (
         <button
           onClick={() => handleFileSubmit()}
@@ -134,7 +143,11 @@ const UploadAndPreview = ({ updateData, updateLoading }) => {
           Analyze Document
         </button>
       )}
-      <ImageSamples images={images} setPreview={setPreview} setSelectedFile={setSelectedFile}/>
+      <ImageSamples
+        images={images}
+        setPreview={setPreview}
+        setSelectedFile={setSelectedFile}
+      />
       <CameraCaptureModal
         isOpen={modalIsOpen}
         onRequestClose={() => setModalIsOpen(false)}
