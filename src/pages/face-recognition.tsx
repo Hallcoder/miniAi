@@ -1,79 +1,79 @@
 // src/pages/face-recognition.js
-import React, { useCallback, useState } from 'react';
-import { Accept, useDropzone } from 'react-dropzone';
-import Image from 'next/image';
+import React, { useCallback, useState } from "react";
+import { Accept, useDropzone } from "react-dropzone";
+import Image from "next/image";
+import sampleImage from "../../public/assets/images/image1.jpg"
+import DropZone from "@/components/DropZone";
+import ImageSamples from "@/components/ImageSamples";
+import image1 from "../../public/assets/images/faces/face1.jpg"
+import image2 from "../../public/assets/images/faces/face2.jpg"
+import image3 from "../../public/assets/images/faces/face3.jpg"
+import image4 from "../../public/assets/images/faces/face4.jpg"
+import image5 from "../../public/assets/images/faces/face5.jpg"
+import image6 from "../../public/assets/images/faces/face6.jpg"
+import image7 from "../../public/assets/images/faces/face7.jpg"
+import image8 from "../../public/assets/images/faces/face8.jpg"
+import toast from "react-hot-toast";
+
+
 const FaceRecognition = () => {
   const [preview, setPreview] = useState<string | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const onDrop = useCallback((acceptedFiles) => {
-    const file = acceptedFiles[0];
-    if (file) {
-      setSelectedFile(file);
-      setPreview(URL.createObjectURL(file));
-    }
-  }, []);
+  const [preview2, setPreview2] = useState<string | null>(null);
+  const [selectedFile2, setSelectedFile2] = useState<File | null>(null);
+  const images = [image1,image2,image3,image4,image5,image6,image7,image8];
 
-  const { getRootProps, getInputProps } = useDropzone({
-    onDrop,
-    accept: "image/*" as unknown as Accept,
-    noClick: false, // Disable click triggering for useDropzone
-  });
+ 
+
   return (
-      <div className="p-4 h-screen">
-        {/* Section 4: Content Area */}
-        <h1 className="text-2xl font-semibold">Face Recognition</h1>
-        <div className="mt-4 flex gap-4">
-          <div className="border ">
-            <h2>Image 1</h2>
-            <div
-        {...getRootProps()}
-        className="border-dashed border-4 m-2 p-4 rounded-md cursor-pointer my-4 min-h-[40vh] w-10/12"
-      >
-        <input {...getInputProps()} style={{ display: "none" }} />
-        <p>Drag & drop an image here</p>
-        {!selectedFile && (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="size-10 mx-auto mt-16 animate-bounce border-2 p-2 border-primary rounded-full"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3"
-            />
-          </svg>
-        )}
-        {preview && (
-          <div style={{ marginTop: "20px" }}>
+    <div className="p-4">
+      {/* Section 4: Content Area */}
+      <h1 className="text-2xl font-semibold">Face Recognition</h1>
+      <div className="flex gap-2 mt-10 w-full justify-between">
+        <div className="flex flex-col flex-1">
+          <h2>Image 1</h2>
+          <DropZone
+            setPreview={setPreview}
+            setSelectedFile={setSelectedFile}
+            selectedFile={selectedFile}
+            preview={preview}
+          />
+          <ImageSamples images={images.slice(0,4)} setPreview={setPreview} setSelectedFile={setSelectedFile}/>
+        </div>
+        <div className="flex flex-col flex-1">
+          <h2>Image 2</h2>
+          <DropZone
+            setPreview={setPreview2}
+            setSelectedFile={setSelectedFile2}
+            selectedFile={selectedFile2}
+            preview={preview2}
+          />
+          <ImageSamples images={images.slice(4)} setPreview={setPreview2} setSelectedFile={setSelectedFile2}/>
+        </div>
+        <div className="ml-4 mt-20 w-4/12">
+          <h2>Results</h2>
+          <span className="flex gap-2 p-1">
             <Image
-              src={preview}
-              alt="Preview"
-              width={0}
-              height={0}
-              objectFit="contain"
-              className="w-full"
+              src={sampleImage}
+              alt="Image 2"
+              width={300}
+              height={200}
             />
-          </div>
-        )}
-      </div>
-          </div>
-          <div>
-            <h2>Image 2</h2>
-            {<Image src="/path/to/image2.jpg" alt="Image 2" width={300} height={200} />}
-          </div>
-          <div>
-            <h2>Image 2</h2>
-            {<Image src="/path/to/image2.jpg" alt="Image 2" width={300} height={200} />}
-          </div>
-        </div>
-        <div className="mt-4">
-          <button className="bg-blue-500 text-white px-4 py-2 rounded">Check Result</button>
+            <Image
+              src={sampleImage}
+              alt="Image 2"
+              width={300}
+              height={200}
+            />
+          </span>
         </div>
       </div>
+      <div className="mt-4">
+        <button className="bg-primary text-white px-4 py-2 rounded">
+          Check Result
+        </button>
+      </div>
+    </div>
   );
 };
 

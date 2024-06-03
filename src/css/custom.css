@@ -1,3 +1,23 @@
 li{
     margin:"12px";
 }
+/* styles/scrollbar.css */
+.scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #4A5568 #EDF2F7;
+  }
+  
+  .scrollbar::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  .scrollbar::-webkit-scrollbar-track {
+    background: #EDF2F7;
+  }
+  
+  .scrollbar::-webkit-scrollbar-thumb {
+    background-color: #4A5568;
+    border-radius: 10px;
+    border: 3px solid #EDF2F7;
+  }
+  

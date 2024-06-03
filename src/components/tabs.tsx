@@ -77,10 +77,10 @@ export default function Tabs({ data, isLoading }) {
     { name: 'API Response', icon: GlobeAltIcon, content: <ApiResponseComponent />, current: true },
   ];
 
-  const [activeTab, setActiveTab] = useState(tabs.find((tab) => tab.current).name);
+  const [activeTab, setActiveTab] = useState(tabs.find((tab) => tab.current)!.name);
 
   return (
-    <div className="w-7/12">
+    <div className="w-7/12 h-full">
       <div className="sm:hidden w-full">
         <label htmlFor="tabs" className="sr-only">
           Select a tab
@@ -127,8 +127,8 @@ export default function Tabs({ data, isLoading }) {
           </nav>
         </div>
       </div>
-      <div className="mt w-full">
-        {tabs.find((tab) => tab.name === activeTab).content}
+      <div className="mt w-full overflow-scroll h-screen">
+        {tabs.find((tab) => tab.name === activeTab)!.content}
       </div>
     </div>
   );
