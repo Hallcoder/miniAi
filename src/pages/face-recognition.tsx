@@ -23,9 +23,9 @@ const FaceRecognition = () => {
   const images = [image1,image2,image3,image4,image5,image6,image7,image8];
 
   return (
-    <div className="flex flex-col items-stretch justify-between p-2 w-full h-screen bg-bgPlaygroundz">
+    <div className="flex flex-col items-stretch justify-between p-4 w-full h-screen bg-bgPlayground">
       {/* Section 4: Content Area */}
-      <h1 className="text-4xl text-center font-semibold">Face Recognition</h1>
+      <span className="min-h-[8vh] mt-4"><h1 className="font-semibold text-4xl flex items-center justify-center my-auto">Face Recognition</h1></span> 
       <div className="flex mt-8 w-full justify-between h-full">
         <div className="flex flex-col flex-1 h-full w-full">
           <h2>Image 1</h2>
@@ -69,7 +69,7 @@ const FaceRecognition = () => {
             <p className="text-xs">Confidence score: 0.900000482642</p>
         </div>
       </div>
-      <div className="mt-4 w-full">
+      <div className="mt-4 w-8/12">
         <button className="bg-primary text-white px-4 py-2 w-full rounded">
           Check Result
         </button>
