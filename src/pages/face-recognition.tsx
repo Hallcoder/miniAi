@@ -2,30 +2,43 @@
 import React, { useCallback, useState } from "react";
 import { Accept, useDropzone } from "react-dropzone";
 import Image from "next/image";
-import sampleImage from "../../public/assets/images/faces/face1.jpg"
+import sampleImage from "../../public/assets/images/faces/face1.jpg";
 import DropZone from "@/components/DropZone";
 import ImageSamples from "@/components/ImageSamples";
-import image1 from "../../public/assets/images/faces/face1.jpg"
-import image2 from "../../public/assets/images/faces/face2.jpg"
-import image3 from "../../public/assets/images/faces/face3.jpg"
-import image4 from "../../public/assets/images/faces/face4.jpg"
-import image5 from "../../public/assets/images/faces/face5.jpg"
-import image6 from "../../public/assets/images/faces/face6.jpg"
-import image7 from "../../public/assets/images/faces/face7.jpg"
-import image8 from "../../public/assets/images/faces/face8.jpg"
-
+import image1 from "../../public/assets/images/faces/face1.jpg";
+import image2 from "../../public/assets/images/faces/face2.jpg";
+import image3 from "../../public/assets/images/faces/face3.jpg";
+import image4 from "../../public/assets/images/faces/face4.jpg";
+import image5 from "../../public/assets/images/faces/face5.jpg";
+import image6 from "../../public/assets/images/faces/face6.jpg";
+import image7 from "../../public/assets/images/faces/face7.jpg";
+import image8 from "../../public/assets/images/faces/face8.jpg";
+import Operator from "@/components/operator";
 
 const FaceRecognition = () => {
   const [preview, setPreview] = useState<string | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [preview2, setPreview2] = useState<string | null>(null);
   const [selectedFile2, setSelectedFile2] = useState<File | null>(null);
-  const images = [image1,image2,image3,image4,image5,image6,image7,image8];
+  const images = [
+    image1,
+    image2,
+    image3,
+    image4,
+    image5,
+    image6,
+    image7,
+    image8,
+  ];
 
   return (
-    <div className="flex flex-col items-stretch justify-between p-4 w-full h-screen bg-bgPlayground">
+    <div className="flex flex-col justify-between p-4 w-fit m-4 bg-bgPlayground">
       {/* Section 4: Content Area */}
-      <span className="min-h-[8vh] mt-4"><h1 className="font-semibold text-4xl flex items-center justify-center my-auto">Face Recognition</h1></span> 
+      <span className="min-h-[8vh] mt-4">
+        <h1 className="font-semibold text-4xl flex items-center justify-center my-auto">
+          Face Recognition
+        </h1>
+      </span>
       <div className="flex mt-8 w-full justify-between h-full">
         <div className="flex flex-col flex-1 h-full w-full">
           <h2>Image 1</h2>
@@ -35,7 +48,11 @@ const FaceRecognition = () => {
             selectedFile={selectedFile}
             preview={preview}
           />
-          <ImageSamples images={images.slice(0,4)} setPreview={setPreview} setSelectedFile={setSelectedFile}/>
+          <ImageSamples
+            images={images.slice(0, 4)}
+            setPreview={setPreview}
+            setSelectedFile={setSelectedFile}
+          />
         </div>
         <div className="flex flex-col flex-1 h-full w-full">
           <h2>Image 2</h2>
@@ -45,28 +62,39 @@ const FaceRecognition = () => {
             selectedFile={selectedFile2}
             preview={preview2}
           />
-          <ImageSamples images={images.slice(4)} setPreview={setPreview2} setSelectedFile={setSelectedFile2}/>
+          <ImageSamples
+            images={images.slice(4)}
+            setPreview={setPreview2}
+            setSelectedFile={setSelectedFile2}
+          />
         </div>
         <div className="flex  mt-6 flex-col justify-between w-4/12 h-3/6">
           <h2>Results</h2>
-         { <span className="flex gap-2 p-1">
-            <Image
-              src={sampleImage}
-              alt="Image 2"
-              width={100}
-              height={50}
-              className="rounded-md"
-            />
-            <Image
-              src={sampleImage}
-              alt="Image 2"
-              width={100}
-              height={50}
-              className="rounded-md"
-            />
-          </span>}
-            <p className="text-xs">Is same Person: Probability High</p>
-            <p className="text-xs">Confidence score: 0.900000482642</p>
+          {
+            <span className="flex items-center gap-2 p-1">
+              <Image
+                src={sampleImage}
+                alt="Image 2"
+                width={100}
+                height={50}
+                className="rounded-md"
+              />
+              <Operator areSame={false} />
+              <Image
+                src={image3}
+                alt="Image 2"
+                width={100}
+                height={50}
+                className="rounded-md"
+              />
+            </span>
+          }
+          <p className="text-sm">
+            <strong>Is same Person</strong>: Probability High
+          </p>
+          <p className="text-sm">
+            <strong>Confidence score</strong>: 0.900000482642
+          </p>
         </div>
       </div>
       <div className="mt-4 w-8/12">
