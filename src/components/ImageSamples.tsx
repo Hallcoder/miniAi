@@ -19,7 +19,7 @@ function ImageSamples({ images, setPreview, setSelectedFile }) {
           );
 
       const dataUrl = await toDataURL(img.src); // img.src for Next.js Image component
-      setPreview(dataUrl as string);
+      setPreview(dataUrl);
 
       // Create a blob from the Data URL
       const blob = await fetch(dataUrl as unknown as string).then((res) =>

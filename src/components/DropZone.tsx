@@ -18,7 +18,7 @@ function DropZone({ preview, selectedFile, setSelectedFile, setPreview }) {
   return (
     <div
       {...getRootProps()}
-      className="border-dashed mt-1 flex flex-col items-center border-4 h-full rounded-md cursor-pointer w-11/12"
+      className="border-dashed mt-1 flex flex-1 flex-col items-center border-4 h-full rounded-md cursor-pointer w-11/12"
     >
       <input {...getInputProps()} style={{ display: "none" }} />
       <p>Drag & drop an image here</p>
@@ -39,16 +39,14 @@ function DropZone({ preview, selectedFile, setSelectedFile, setPreview }) {
         </svg>
       )}
       {preview && (
-        <div className="w-full">
           <Image
             src={preview}
             alt="Preview"
             width={0}
             height={0}
-            objectFit="cover"
-            className="w-5/6 h-5/6 mt-4 mb-1 m-auto rounded-sm"
+            objectFit="contain"
+            className="w-10/12 flex flex-1 h-3/6 mt-4 mb-1 m-auto rounded-sm"
           />
-        </div>
       )}
     </div>
   );

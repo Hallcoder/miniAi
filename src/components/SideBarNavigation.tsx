@@ -13,7 +13,7 @@ const navigation = [
     icon: UsersIcon,
     current: false,
     children: [
-      { name: 'Face Recognition', href: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/face-recognition` },
+      { name: 'Face Recognition', href: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/face-matching` },
       { name: 'Face Liveness Detection', href: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/face-liveness-detection` },
       { name: 'Face Mask Detection', href: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/face-mask-detection` },
       { name: 'Face Emotional Detection', href: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/face-emotional-detection` }
@@ -48,7 +48,6 @@ export default function SideBarNavigation() {
         <Link href="/"><Image
           className="h-24 m-auto mt-2 w-auto cursor-pointer"
           src={logo}
-        //   onClick={goHome}
           alt="Your Company"
         /></Link>
       </div>
