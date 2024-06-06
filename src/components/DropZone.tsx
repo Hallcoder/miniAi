@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useCallback } from "react";
 import { Accept, useDropzone } from "react-dropzone";
-function DropZone({ preview, selectedFile, setSelectedFile, setPreview }) {
+function DropZone({ preview, selectedFile, setSelectedFile, setPreview, constraintWidth }) {
   const onDrop = useCallback((acceptedFiles) => {
     const file = acceptedFiles[0];
     if (file) {
@@ -21,7 +21,7 @@ function DropZone({ preview, selectedFile, setSelectedFile, setPreview }) {
       className="border-dashed mt-1 flex flex-1 flex-col items-center border-4 h-full rounded-md cursor-pointer w-11/12"
     >
       <input {...getInputProps()} style={{ display: "none" }} />
-      <p>Drag & drop an image here</p>
+      {!preview && <p>Drag & drop an image here</p>}
       {!selectedFile && (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +45,7 @@ function DropZone({ preview, selectedFile, setSelectedFile, setPreview }) {
             width={0}
             height={0}
             objectFit="contain"
-            className="w-10/12 flex flex-1 h-3/6 mt-4 mb-1 m-auto rounded-sm"
+            className={`${constraintWidth} flex flex-1 h-3/6 mt-4 mb-1 m-auto rounded-sm`}
           />
       )}
     </div>

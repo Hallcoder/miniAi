@@ -43,7 +43,7 @@ export default function SideBarNavigation() {
         })
     }
   return (
-    <div className="fixed  top-0 left-0 bottom-0 h-screen flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
+    <div className="fixed top-0 left-0 bottom-0 h-screen flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
       <div className="flex shrink-0 m-auto items-center">
         <Link href="/"><Image
           className="h-24 m-auto mt-2 w-auto cursor-pointer"
