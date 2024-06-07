@@ -15,7 +15,6 @@ const navigation = [
     children: [
       { name: 'Face Recognition', href: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/face-matching` },
       { name: 'Face Liveness Detection', href: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/face-liveness-detection` },
-      { name: 'Face Mask Detection', href: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/face-mask-detection` },
       { name: 'Face Emotional Detection', href: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/face-emotional-detection` }
     ]
   },

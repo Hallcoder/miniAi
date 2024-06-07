@@ -29,7 +29,7 @@ function FaceLiveness() {
     axios
       .post(process.env.NEXT_PUBLIC_API_URL_FACE_LIVENESS!, formData, {
         headers: {
-          "Content-Type":"multipart/form-data"
+          "Content-Type": "multipart/form-data",
         },
       })
       .then((data) => {
@@ -50,7 +50,7 @@ function FaceLiveness() {
       {/* Section 4: Content Area */}
       <span className="min-h-[6vh] mt-4">
         <h1 className="font-semibold text-4xl flex items-center justify-center my-auto">
-          Face Recognition
+          Face Liveness Detection
         </h1>
       </span>
       <div className="flex mt-8 h-screen">
@@ -73,25 +73,43 @@ function FaceLiveness() {
         </div>
         {!isLoading ? (
           Object.entries(data).length > 0 ? (
-            <div className="flex mt-6 ml-4 flex-col h-4/6 justify-between w-4/12 overflow-hidden">
+            <div className="flex ml-4 flex-col gap-2 w-4/12 overflow-hidden">
               <h2>Results</h2>
               {
-                <span className="flex items-center gap-2 p-1">
+                <span className="flex items-center p-1">
                   <Image
                     src={preview}
                     alt="Image 1"
                     width={0}
                     height={0}
-                    className="w-5/12 h-5/6 rounded-md"
+                    className="w-7/12 h-full rounded-md"
                   />
                 </span>
               }
-              <p className="text-sm my-2">
-                <strong>Is same Person</strong>: {data["compare_result"]}
-              </p>
-              <p className="text-sm">
-                <strong>Confidence score</strong>: {data["compare_similarity"]}
-              </p>
+              <table>
+                <tbody>
+                  <tr>
+                    <th className="text-sm border-b border-black mx-2 p-2">
+                      FaceID
+                    </th>
+                    <th className="text-sm border-b border-black mx-2 p-2">
+                      Age
+                    </th>
+                    <th className="text-sm border-b border-black mx-2 p-2">
+                      Gender
+                    </th>
+                    <th className="text-sm border-b border-black mx-2 p-2">
+                      Liveness
+                    </th>
+                  </tr>
+                  <tr>
+                    <td className="text-sm text-center border-b border-black mx-2 p-2">{data["faces"][0]["FaceID"]}</td>
+                    <td className="text-sm text-center border-b border-black mx-2 p-2">{data["faces"][0]["Age"]}</td>
+                    <td className="text-sm text-center border-b border-black mx-2 p-2">{data["faces"][0]["Gender"]}</td>
+                    <td className="text-sm text-center border-b border-black mx-2 p-2">{data["faces"][0]["livenessScore"] > 0.75 ? "Real":"Fake"}</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           ) : (
             <div className="mx-auto mt-[20vh]">Upload to view results</div>

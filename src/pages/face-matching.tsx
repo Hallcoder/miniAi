@@ -124,7 +124,7 @@ const FaceRecognition = () => {
                   />
                   <Operator
                     areSame={
-                      data["compare_similarity"] >= 0.65
+                      data["compare_similarity"] >= 0.75
                         ? true
                         : false
                     }
