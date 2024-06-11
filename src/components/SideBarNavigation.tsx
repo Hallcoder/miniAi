@@ -59,7 +59,7 @@ export default function SideBarNavigation() {
     return href.includes(router.pathname.split("/")[1]);
   };
   return (
-    <div className="fixed top-0 left-0 bottom-0 h-screen flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
+    <div className="fixed top-0 left-0 bottom-0 h-screen flex grow flex-col gap-y-5 overflow-y-auto border-gray-200 bg-white px-6">
       <div className="flex shrink-0 m-auto items-center">
         <Link href="/">
           <Image
@@ -125,9 +125,9 @@ export default function SideBarNavigation() {
                               href={subItem.href}
                               className={classNames(
                                 isCurrentPath(subItem.href)
-                                  ? "bg-gray-50 border-l-2 border-primary"
-                                  : "hover:bg-gray-50",
-                                "block py-2 pr-2 pl-9 text-sm leading-6 text-gray-700"
+                                  ? "bg-gray-100 border-l-2 border-primary text-primary"
+                                  : "hover:bg-gray-50 text-gray-700",
+                                "block py-2 pr-2 pl-9 text-sm leading-6 "
                               )}
                             >
                               {subItem.name}

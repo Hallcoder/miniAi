@@ -1,7 +1,16 @@
 import Image from "next/image";
 import { useCallback } from "react";
 import { Accept, useDropzone } from "react-dropzone";
-function DropZone({ preview, selectedFile, setSelectedFile, setPreview, constraintWidth }) {
+import { TbCloudUpload } from "react-icons/tb";
+import ImageUploadSymbol from "./ImageUploadSymbol";
+function DropZone({
+  preview,
+  selectedFile,
+  setSelectedFile,
+  setPreview,
+  constraintWidth,
+  number
+}) {
   const onDrop = useCallback((acceptedFiles) => {
     const file = acceptedFiles[0];
     if (file) {
@@ -17,36 +26,25 @@ function DropZone({ preview, selectedFile, setSelectedFile, setPreview, constrai
   });
   return (
     <div
+      id="dashedBorder"
       {...getRootProps()}
-      className="border-dashed mt-1 flex flex-1 flex-col items-center border-4 h-full rounded-md cursor-pointer w-11/12"
+      className="mt-1 border-primary justify-center mb-4 flex flex-1 flex-col items-center h-[50vh] rounded-md cursor-pointer w-10/12"
     >
       <input {...getInputProps()} style={{ display: "none" }} />
-      {!preview && <p>Drag & drop an image here</p>}
+      {!selectedFile && <ImageUploadSymbol number={number}/>}
       {!selectedFile && (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="size-10 mx-auto mt-16 animate-bounce border-2 p-2 border-primary rounded-full"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3"
-          />
-        </svg>
+        <TbCloudUpload className="size-14 mx-auto my-4 p-2 text-primary font-extrabold" />
       )}
       {preview && (
-          <Image
-            src={preview}
-            alt="Preview"
-            width={0}
-            height={0}
-            className={`${constraintWidth} h-5/6 flex flex-1 mb-1 m-auto rounded-sm`}
-          />
+        <Image
+          src={preview}
+          alt="Preview"
+          width={0}
+          height={0}
+          className={`${constraintWidth} h-5/6 mb-1 rounded-sm`}
+        />
       )}
+     {!selectedFile &&  <p className="text-primary font-bold text-xl">Drag & Drop image</p>}
     </div>
   );
 }

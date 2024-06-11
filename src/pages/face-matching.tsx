@@ -1,8 +1,6 @@
 // src/pages/face-recognition.js
-import React, { useCallback, useState } from "react";
-import { Accept, useDropzone } from "react-dropzone";
+import React, { useState } from "react";
 import Image from "next/image";
-import sampleImage from "../../public/assets/images/faces/face1.jpg";
 import DropZone from "@/components/DropZone";
 import ImageSamples from "@/components/ImageSamples";
 import image1 from "../../public/assets/images/faces/face1.jpg";
@@ -66,7 +64,7 @@ const FaceRecognition = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen justify-between p-4  bg-bgPlayground">
+    <div className="flex flex-col min-h-screen justify-center p-4  bg-bgPlayground">
       <Toaster />
       {/* Section 4: Content Area */}
       <span className="min-h-[6vh] mt-4">
@@ -74,18 +72,18 @@ const FaceRecognition = () => {
           Face Recognition
         </h1>
       </span>
-      <div className="flex mt-8 min-h-screen">
+      <div className="flex mt-8 min-h-[80vh]">
         <div className="flex flex-col w-4/12">
-          <h2>Image 1</h2>
-          <div className="h-3/6 mb-2">
+          {/* <div className="h-3/6 mb-2"> */}
             <DropZone
               constraintWidth={"w-10/12"}
               setPreview={setPreview}
               setSelectedFile={setSelectedFile}
               selectedFile={selectedFile}
               preview={preview}
+              number={1}
             />
-          </div>
+          {/* </div> */}
           <ImageSamples
             images={images.slice(0, 4)}
             setPreview={setPreview}
@@ -93,16 +91,16 @@ const FaceRecognition = () => {
           />
         </div>
         <div className="flex flex-col w-4/12">
-          <h2>Image 2</h2>
-          <div className="h-3/6 mb-2">
+          {/* <div className="h-3/6 mb-2"> */}
             <DropZone
               constraintWidth={"w-10/12"}
               setPreview={setPreview2}
               setSelectedFile={setSelectedFile2}
               selectedFile={selectedFile2}
               preview={preview2}
+              number={2}
             />
-          </div>
+          {/* </div> */}
           <ImageSamples
             images={images.slice(4)}
             setPreview={setPreview2}

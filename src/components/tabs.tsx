@@ -78,8 +78,8 @@ export default function Tabs({ data, isLoading }) {
   const [activeTab, setActiveTab] = useState(tabs.find((tab) => tab.current)!.name);
 
   return (
-    <div className="w-7/12 h-full">
-      <div className="sm:hidden w-full">
+    <div className="w-7/12 h-full bgPlayground">
+      <div className="sm:hidden w-full bg-white">
         <label htmlFor="tabs" className="sr-only">
           Select a tab
         </label>
@@ -97,7 +97,7 @@ export default function Tabs({ data, isLoading }) {
           ))}
         </select>
       </div>
-      <div className="hidden sm:block w-full">
+      <div className="hidden sm:block w-full m-2 rounded-md bg-white">
         <div className="border-b border-gray-200">
           <nav className="-mb-px flex space-x-8" aria-label="Tabs">
             {tabs.map((tab) => (
@@ -125,7 +125,7 @@ export default function Tabs({ data, isLoading }) {
           </nav>
         </div>
       </div>
-      <div className="mt w-full overflow-scroll h-screen">
+      <div className="m-1 w-full rounded-md overflow-scroll bg-white h-screen">
         {tabs.find((tab) => tab.name === activeTab)!.content}
       </div>
     </div>

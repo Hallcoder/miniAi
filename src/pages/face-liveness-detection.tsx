@@ -55,7 +55,6 @@ function FaceLiveness() {
       </span>
       <div className="flex mt-8 h-screen">
         <div className="flex flex-col w-7/12">
-          <h2>Image 1</h2>
           <div className="h-4/6 mb-2">
             <DropZone
               constraintWidth={"w-6/12"}
@@ -63,6 +62,8 @@ function FaceLiveness() {
               setSelectedFile={setSelectedFile}
               selectedFile={selectedFile}
               preview={preview}
+              number={1}
+
             />
           </div>
           <ImageSamples
