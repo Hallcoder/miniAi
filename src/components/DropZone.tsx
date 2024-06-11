@@ -44,8 +44,7 @@ function DropZone({ preview, selectedFile, setSelectedFile, setPreview, constrai
             alt="Preview"
             width={0}
             height={0}
-            objectFit="contain"
-            className={`${constraintWidth} flex flex-1 h-3/6 mt-4 mb-1 m-auto rounded-sm`}
+            className={`${constraintWidth} h-5/6 flex flex-1 mb-1 m-auto rounded-sm`}
           />
       )}
     </div>

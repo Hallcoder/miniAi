@@ -2,6 +2,7 @@
 import Layout from "@/components/Layout";
 import "../app/globals.css";
 import { Roboto } from "next/font/google";
+import { RecoilRoot } from "recoil";
 
 const roboto = Roboto({
   weight: "400",
@@ -10,9 +11,11 @@ const roboto = Roboto({
 function MyApp({ Component, pageProps }) {
   return (
     <main className={roboto.className}>
+      <RecoilRoot>
       <Layout>
         <Component {...pageProps} />
       </Layout>
+      </RecoilRoot>
     </main>
   );
 }

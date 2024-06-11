@@ -66,7 +66,7 @@ const FaceRecognition = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen justify-between p-4 m-3 bg-bgPlayground">
+    <div className="flex flex-col min-h-screen justify-between p-4  bg-bgPlayground">
       <Toaster />
       {/* Section 4: Content Area */}
       <span className="min-h-[6vh] mt-4">

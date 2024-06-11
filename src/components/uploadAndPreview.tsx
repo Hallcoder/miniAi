@@ -75,8 +75,9 @@ const UploadAndPreview = ({ updateData, updateLoading }) => {
   return (
     <div className="flex flex-col items-center w-full h-4/6">
       <Toaster />
-      <div className="w-full h-full flex justify-center">
+      <div className="w-11/12 h-full flex justify-center">
         <DropZone
+          constraintWidth={"w-10/12"}
           preview={preview}
           setSelectedFile={setSelectedFile}
           selectedFile={selectedFile}
