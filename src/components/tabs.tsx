@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { DocumentChartBarIcon, GlobeAltIcon, PhotoIcon } from '@heroicons/react/20/solid';
 import { ThreeDot } from 'react-loading-indicators';
 import Image from 'next/image';
-
+import illustration from "../../public/assets/illustration.png"
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
@@ -72,7 +72,7 @@ export default function Tabs({ data, isLoading }) {
   const tabs = [
     { name: 'Extracted Data', icon: DocumentChartBarIcon, content: <ExtractedDataComponent />, current: true },
     { name: 'Images', icon: PhotoIcon, content: <ImagesComponent />, current: false },
-    { name: 'API Response', icon: GlobeAltIcon, content: <ApiResponseComponent />, current: false },
+    // { name: 'API Response', icon: GlobeAltIcon, content: <ApiResponseComponent />, current: false },
   ];
 
   const [activeTab, setActiveTab] = useState(tabs.find((tab) => tab.current)!.name);
@@ -126,7 +126,7 @@ export default function Tabs({ data, isLoading }) {
         </div>
       </div>
       <div className="m-1 w-full rounded-md overflow-scroll bg-white h-screen">
-        {tabs.find((tab) => tab.name === activeTab)!.content}
+        {Object.entries(data).length > 2 ? tabs.find((tab) => tab.name === activeTab)!.content: <Image className="mt-[25%] mx-[25%]" height={0} width={0} src={illustration}/>}
       </div>
     </div>
   );

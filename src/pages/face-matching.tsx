@@ -15,6 +15,8 @@ import Operator from "@/components/operator";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import { ThreeDot } from "react-loading-indicators";
+import ImageCropper from "@/components/ImageCropper";
+import ServicesText from "@/components/servicesText";
 
 const FaceRecognition = () => {
   const [preview, setPreview] = useState<string | null>(null);
@@ -23,6 +25,9 @@ const FaceRecognition = () => {
   const [selectedFile2, setSelectedFile2] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState<Boolean>(false);
   const [data, setData] = useState({});
+  const [face1, setFace1] = useState({});
+  const [face2, setFace2] = useState({});
+
   const images = [
     image1,
     image2,
@@ -52,6 +57,9 @@ const FaceRecognition = () => {
         },
       })
       .then((data) => {
+        console.log(data.data);
+        setFace1(data.data.face1);
+        setFace2(data.data.face2);
         setData(data.data);
       })
       .finally(() => {
@@ -75,16 +83,17 @@ const FaceRecognition = () => {
       <div className="flex mt-8 min-h-[80vh]">
         <div className="flex flex-col w-4/12">
           {/* <div className="h-3/6 mb-2"> */}
-            <DropZone
-              constraintWidth={"w-10/12"}
-              setPreview={setPreview}
-              setSelectedFile={setSelectedFile}
-              selectedFile={selectedFile}
-              preview={preview}
-              number={1}
-            />
+          <DropZone
+            constraintWidth={"w-10/12"}
+            setPreview={setPreview}
+            setSelectedFile={setSelectedFile}
+            selectedFile={selectedFile}
+            preview={preview}
+            number={1}
+          />
           {/* </div> */}
           <ImageSamples
+            showText={false}
             images={images.slice(0, 4)}
             setPreview={setPreview}
             setSelectedFile={setSelectedFile}
@@ -92,16 +101,16 @@ const FaceRecognition = () => {
         </div>
         <div className="flex flex-col w-4/12">
           {/* <div className="h-3/6 mb-2"> */}
-            <DropZone
-              constraintWidth={"w-10/12"}
-              setPreview={setPreview2}
-              setSelectedFile={setSelectedFile2}
-              selectedFile={selectedFile2}
-              preview={preview2}
-              number={2}
-            />
+          <DropZone
+            setPreview={setPreview2}
+            setSelectedFile={setSelectedFile2}
+            selectedFile={selectedFile2}
+            preview={preview2}
+            number={2}
+          />
           {/* </div> */}
           <ImageSamples
+            showText={false}
             images={images.slice(4)}
             setPreview={setPreview2}
             setSelectedFile={setSelectedFile2}
@@ -113,26 +122,22 @@ const FaceRecognition = () => {
               <h2>Results</h2>
               {
                 <span className="flex items-center gap-2 p-1">
-                  <Image
+                  <ImageCropper
                     src={preview}
-                    alt="Image 1"
-                    width={0}
-                    height={0}
-                    className="w-5/12 h-5/6 rounded-md"
+                    topLeftX={face1["x1"]}
+                    topLeftY={face1["y1"]}
+                    width={face1["x2"] - face1["x1"]}
+                    height={face1["y2"] - face1["y1"]}
                   />
                   <Operator
-                    areSame={
-                      data["compare_similarity"] >= 0.75
-                        ? true
-                        : false
-                    }
+                    areSame={data["compare_similarity"] >= 0.75 ? true : false}
                   />
-                  <Image
+                  <ImageCropper
                     src={preview2}
-                    alt="Image 2"
-                    width={0}
-                    height={0}
-                    className="w-5/12 h-5/6 rounded-md"
+                    topLeftX={face2["x1"]}
+                    topLeftY={face2["y1"]}
+                    width={face2["x2"] - face2["x1"]}
+                    height={face2["y2"] - face2["y1"]}
                   />
                 </span>
               }
@@ -147,7 +152,9 @@ const FaceRecognition = () => {
             <div className="mx-auto mt-[20vh]">Upload to view results</div>
           )
         ) : (
-          <span className="m-auto"><ThreeDot color="#FF5000" /></span>
+          <span className="m-auto">
+            <ThreeDot color="#FF5000" />
+          </span>
         )}
       </div>
       {!isLoading ? (
@@ -158,9 +165,13 @@ const FaceRecognition = () => {
           >
             Check Result
           </button>
+          <ServicesText />
         </div>
       ) : (
-        <span className="m-auto w-6/12"><ThreeDot color="#FF5000" /></span>
+        <div className="w-8/12">
+          <span className="m-auto w-full"><ThreeDot color="#FF5000" /></span>
+          <ServicesText />
+        </div>
       )}
     </div>
   );

@@ -54,18 +54,18 @@ function FaceEmotion() {
         </h1>
       </span>
       <div className="flex mt-8 h-screen">
-        <div className="flex flex-col w-7/12">
-          <div className="h-4/6 mb-2">
+        <div className="flex flex-col w-7/12 items-center">
+          {/* <div className="h-4/6 mb-2"> */}
             <DropZone
-              constraintWidth={"w-7/12"}
               setPreview={setPreview}
               setSelectedFile={setSelectedFile}
               selectedFile={selectedFile}
               preview={preview}
               number={1}
             />
-          </div>
+          {/* </div> */}
           <ImageSamples
+            showText={true}
             images={images.slice(0, 4)}
             setPreview={setPreview}
             setSelectedFile={setSelectedFile}

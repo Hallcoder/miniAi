@@ -8,7 +8,6 @@ function DropZone({
   selectedFile,
   setSelectedFile,
   setPreview,
-  constraintWidth,
   number
 }) {
   const onDrop = useCallback((acceptedFiles) => {
@@ -28,7 +27,7 @@ function DropZone({
     <div
       id="dashedBorder"
       {...getRootProps()}
-      className="mt-1 border-primary justify-center mb-4 flex flex-1 flex-col items-center h-[50vh] rounded-md cursor-pointer w-10/12"
+      className="mt-1 border-primary justify-center mb-4 flex flex-1 flex-col items-center h-[50vh] rounded-md cursor-pointer w-10/12 p-2"
     >
       <input {...getInputProps()} style={{ display: "none" }} />
       {!selectedFile && <ImageUploadSymbol number={number}/>}
@@ -41,7 +40,7 @@ function DropZone({
           alt="Preview"
           width={0}
           height={0}
-          className={`${constraintWidth} h-5/6 mb-1 rounded-sm`}
+          className={`w-fit h-5/6 mb-1 rounded-sm`}
         />
       )}
      {!selectedFile &&  <p className="text-primary font-bold text-xl">Drag & Drop image</p>}

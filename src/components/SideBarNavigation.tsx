@@ -55,7 +55,7 @@ function classNames(...classes) {
 export default function SideBarNavigation() {
   const router = useRouter();
   const [currentParent, setParent] = useRecoilState(sideBarCurrentParent);
-  const isCurrentPath = (href) => {
+  const isCurrentPath = (href:string) => {
     return href.includes(router.pathname.split("/")[1]);
   };
   return (

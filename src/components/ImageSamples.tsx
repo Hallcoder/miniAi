@@ -1,7 +1,8 @@
 import Image from "next/image";
 import toast from "react-hot-toast";
+import ServicesText from "./servicesText";
 
-function ImageSamples({ images, setPreview, setSelectedFile }) {
+function ImageSamples({ images, setPreview, setSelectedFile,showText }) {
   const handleSampleClick = async (img) => {
     try {
       // Convert the imported image to a Data URL (base64)
@@ -68,6 +69,7 @@ function ImageSamples({ images, setPreview, setSelectedFile }) {
           );
         })}
       </span>
+      {showText && <ServicesText />}
     </div>
   );
 }
