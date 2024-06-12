@@ -36,8 +36,8 @@ function ImageSamples({ images, setPreview, setSelectedFile,showText }) {
     }
   };
   return (
-    <div className="w-10/12">
-      <span className="flex items-center">
+    <div className="w-10/12 bg-bgPlayground">
+      <span className="flex items-center bg-white rounded-md p-2 m-1">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -54,7 +54,7 @@ function ImageSamples({ images, setPreview, setSelectedFile,showText }) {
         </svg>
         <h2 className="font-semibold text-xs">Examples</h2>
       </span>
-      <span className="flex flex-wrap gap-1 mb-4 w-full">
+      <span className="flex flex-wrap gap-1 p-2 mx-2 my-2 w-full bg-white rounded-md">
         {images.map((img, index) => {
           return (
             <Image

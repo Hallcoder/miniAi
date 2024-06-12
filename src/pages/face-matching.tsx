@@ -72,19 +72,18 @@ const FaceRecognition = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen justify-center p-4  bg-bgPlayground">
+    <div className="flex flex-col min-h-screen justify-center p-2 bg-bgPlayground">
       <Toaster />
       {/* Section 4: Content Area */}
-      <span className="min-h-[6vh] mt-4">
+      <span className="min-h-[6vh] py-8 bg-white">
         <h1 className="font-semibold text-4xl flex items-center justify-center my-auto">
           Face Recognition
         </h1>
       </span>
-      <div className="flex mt-8 min-h-[80vh]">
+      <div className="flex mt-4 min-h-[80vh] bg-white">
         <div className="flex flex-col w-4/12">
           {/* <div className="h-3/6 mb-2"> */}
           <DropZone
-            constraintWidth={"w-10/12"}
             setPreview={setPreview}
             setSelectedFile={setSelectedFile}
             selectedFile={selectedFile}
@@ -99,7 +98,7 @@ const FaceRecognition = () => {
             setSelectedFile={setSelectedFile}
           />
         </div>
-        <div className="flex flex-col w-4/12">
+        <div className="flex flex-col w-4/12 bg-white">
           {/* <div className="h-3/6 mb-2"> */}
           <DropZone
             setPreview={setPreview2}
@@ -158,19 +157,19 @@ const FaceRecognition = () => {
         )}
       </div>
       {!isLoading ? (
-        <div className="w-8/12">
+        <div className="w-full bg-white">
           <button
-            className="bg-primary text-white px-4 py-2 w-full rounded"
+            className="bg-primary w-8/12 text-white px-4 py-2  rounded"
             onClick={handleSubmit}
           >
             Check Result
           </button>
-          <ServicesText />
+          <span className="w-8/12 border-2"><ServicesText /></span>
         </div>
       ) : (
-        <div className="w-8/12">
-          <span className="m-auto w-full"><ThreeDot color="#FF5000" /></span>
-          <ServicesText />
+        <div className="w-full bg-white">
+          <span className="m-auto"><ThreeDot color="#FF5000" /></span>
+          <span className="w-8/12 border-2"><ServicesText /></span>
         </div>
       )}
     </div>
