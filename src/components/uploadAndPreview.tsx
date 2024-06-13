@@ -13,7 +13,6 @@ import ImageSamples from "./ImageSamples";
 const UploadAndPreview = ({ updateData, updateLoading, pageType }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef(null);
   const images = [image1, image2, image3, image4];
@@ -33,12 +32,12 @@ const UploadAndPreview = ({ updateData, updateLoading, pageType }) => {
       setIsUploading(false);
       updateLoading(false);
       toast.error("Please Input image!");
-      console.log("awaa")
+      console.log("awaa");
       return;
-    };
+    }
     const formData = new FormData();
     formData.append("file", selectedFile);
-        
+
     axios
       .post(
         `${process.env.NEXT_PUBLIC_API_URL!}/idcard_recognition`,
@@ -63,107 +62,68 @@ const UploadAndPreview = ({ updateData, updateLoading, pageType }) => {
       });
   };
 
-  const handleCapture = async (dataUrl) => {
-    console.log("DataUrl", dataUrl);
-    const blob = await fetch(dataUrl).then((res) => res.blob());
-    const file = new File([blob], "captured_image.png", { type: "image/png" });
-    setSelectedFile(file);
-    console.log("Another file", file);
-    setPreview(dataUrl);
-  };
-
   return (
-    <div className="flex flex-col items-center w-full h-4/6">
-      <Toaster />
-      <div className="w-11/12 h-full flex justify-center">
-        <DropZone
-          preview={preview}
-          setSelectedFile={setSelectedFile}
-          selectedFile={selectedFile}
+      <div className="flex flex-col items-center w-full h-4/6">
+        <Toaster />
+        <div className="w-11/12 h-full flex justify-center">
+          <DropZone
+            preview={preview}
+            setSelectedFile={setSelectedFile}
+            selectedFile={selectedFile}
+            setPreview={setPreview}
+          />
+        </div>
+        <div className="flex items-center w-8/12 mb-4">
+          <button
+            type="button"
+            onClick={() => fileInputRef.current!.click()}
+            className="inline-flex justify-center items-center gap-x-2 rounded-md bg-primary px-3.5 py-2.5 text-xs font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 w-6/12 h-4/6"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-4"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15m0-3-3-3m0 0-3 3m3-3V15"
+              />
+            </svg>
+            Upload
+          </button>
+          <input
+            type="file"
+            accept="image/*"
+            ref={fileInputRef}
+            onChange={handleFileChange}
+            style={{ display: "none" }}
+          />
+          {isUploading ? (
+            <ThreeDot color="#FF5000" />
+          ) : (
+            <button
+              onClick={() => handleFileSubmit()}
+              type="button"
+              className="inline-flex justify-center items-center gap-x-2 my-2 rounded-md bg-primary px-3.5 py-2.5 text-xs font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 w-6/12 m-1 h-4/6"
+            >
+              Analyze Document
+            </button>
+          )}
+        </div>
+
+        <ImageSamples
+          showText={true}
+          updateData={updateData}
+          images={images}
           setPreview={setPreview}
-        />
+          setSelectedFile={setSelectedFile}
+        />  
       </div>
-      <div className="flex items-center w-8/12 mb-4">
-        <button
-          type="button"
-          onClick={() => fileInputRef.current!.click()}
-          className="inline-flex justify-center items-center gap-x-2 rounded-md bg-primary px-3.5 py-2.5 text-xs font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 w-6/12 h-4/6"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="size-4"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15m0-3-3-3m0 0-3 3m3-3V15"
-            />
-          </svg>
-          Upload
-        </button>
-        <input
-          type="file"
-          accept="image/*"
-          ref={fileInputRef}
-          onChange={handleFileChange}
-          style={{ display: "none" }}
-        />
-        {/* <button
-          onClick={() => setModalIsOpen(true)}
-          type="button"
-          className="inline-flex text-center mx-1 items-center gap-x-2 rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 w-6/12"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="size-4"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z"
-            />
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z"
-            />
-          </svg>
-          Take Photo
-        </button> */}
-      {isUploading ? (
-        <ThreeDot color="#FF5000"/>
-      ) : (
-        <button
-          onClick={() => handleFileSubmit()}
-          type="button"
-          className="inline-flex justify-center items-center gap-x-2 my-2 rounded-md bg-primary px-3.5 py-2.5 text-xs font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 w-6/12 m-1 h-4/6"
-        >
-          Analyze Document
-        </button>
-      )}
-      </div>
-      <ImageSamples
-        showText={true}
-        updateData={updateData}
-        images={images}
-        setPreview={setPreview}
-        setSelectedFile={setSelectedFile}
-      />
-      <CameraCaptureModal
-        isOpen={modalIsOpen}
-        onRequestClose={() => setModalIsOpen(false)}
-        onCapture={handleCapture}
-      />
-    </div>
-  );
+       );
 };
 
 export default UploadAndPreview;
