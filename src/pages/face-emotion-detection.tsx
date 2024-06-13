@@ -56,15 +56,16 @@ function FaceEmotion() {
       <div className="flex mt-8 h-screen">
         <div className="flex flex-col w-7/12 items-center">
           {/* <div className="h-4/6 mb-2"> */}
-            <DropZone
-              setPreview={setPreview}
-              setSelectedFile={setSelectedFile}
-              selectedFile={selectedFile}
-              preview={preview}
-              number={1}
-            />
+          <DropZone
+            setPreview={setPreview}
+            setSelectedFile={setSelectedFile}
+            selectedFile={selectedFile}
+            preview={preview}
+            number={1}
+          />
           {/* </div> */}
           <ImageSamples
+            updateData={setData}
             showText={true}
             images={images.slice(0, 4)}
             setPreview={setPreview}
@@ -86,7 +87,10 @@ function FaceEmotion() {
                   />
                 </span>
               }
-              <span className="flex text-sm p-1 items-center"><p className="mx-1 font-bold">Emotion:</p>{data["emotion_result"]}</span>
+              <span className="flex text-sm p-1 items-center">
+                <p className="mx-1 font-bold">Emotion:</p>
+                {data["emotion_result"]}
+              </span>
             </div>
           ) : (
             <div className="mx-auto mt-[20vh]">Upload to view results</div>

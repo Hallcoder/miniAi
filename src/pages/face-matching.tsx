@@ -1,5 +1,5 @@
 // src/pages/face-recognition.js
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import DropZone from "@/components/DropZone";
 import ImageSamples from "@/components/ImageSamples";
@@ -92,6 +92,7 @@ const FaceRecognition = () => {
           />
           {/* </div> */}
           <ImageSamples
+            updateData={setData}
             showText={false}
             images={images.slice(0, 4)}
             setPreview={setPreview}
@@ -109,6 +110,7 @@ const FaceRecognition = () => {
           />
           {/* </div> */}
           <ImageSamples
+            updateData={setData}
             showText={false}
             images={images.slice(4)}
             setPreview={setPreview2}
@@ -164,12 +166,18 @@ const FaceRecognition = () => {
           >
             Check Result
           </button>
-          <span className="w-8/12 border-2"><ServicesText /></span>
+          <span className="w-8/12 border-2">
+            <ServicesText />
+          </span>
         </div>
       ) : (
         <div className="w-full bg-white">
-          <span className="m-auto"><ThreeDot color="#FF5000" /></span>
-          <span className="w-8/12 border-2"><ServicesText /></span>
+          <span className="m-auto">
+            <ThreeDot color="#FF5000" />
+          </span>
+          <span className="w-8/12 border-2">
+            <ServicesText />
+          </span>
         </div>
       )}
     </div>

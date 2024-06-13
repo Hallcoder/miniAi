@@ -38,11 +38,11 @@ const navigation = [
       },
       {
         name: "Credit Card Recognition",
-        href: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/`,
+        href: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/credit-card-recognition`,
       },
       {
         name: "MRZ/Barcode Recognition",
-        href: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/`,
+        href: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/barcode-reader`,
       },
     ],
   },

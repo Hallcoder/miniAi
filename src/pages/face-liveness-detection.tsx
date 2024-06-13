@@ -56,18 +56,18 @@ function FaceLiveness() {
       <div className="flex mt-8 h-screen">
         <div className="flex flex-col w-7/12 items-center">
           {/* <div className="h-4/6 mb-2"> */}
-            <DropZone
-              // constraintWidth={"w-6/12"}
-              setPreview={setPreview}
-              setSelectedFile={setSelectedFile}
-              selectedFile={selectedFile}
-              preview={preview}
-              number={1}
-
-            />
+          <DropZone
+            // constraintWidth={"w-6/12"}
+            setPreview={setPreview}
+            setSelectedFile={setSelectedFile}
+            selectedFile={selectedFile}
+            preview={preview}
+            number={1}
+          />
           {/* </div> */}
           <ImageSamples
-          showText={true}
+            updateData={setData}
+            showText={true}
             images={images.slice(0, 4)}
             setPreview={setPreview}
             setSelectedFile={setSelectedFile}
@@ -105,10 +105,20 @@ function FaceLiveness() {
                     </th>
                   </tr>
                   <tr>
-                    <td className="text-sm text-center border-b border-black mx-2 p-2">{data["faces"][0]["FaceID"]}</td>
-                    <td className="text-sm text-center border-b border-black mx-2 p-2">{data["faces"][0]["Age"]}</td>
-                    <td className="text-sm text-center border-b border-black mx-2 p-2">{data["faces"][0]["Gender"]}</td>
-                    <td className="text-sm text-center border-b border-black mx-2 p-2">{data["faces"][0]["livenessScore"] > 0.75 ? "Real":"Fake"}</td>
+                    <td className="text-sm text-center border-b border-black mx-2 p-2">
+                      {data["faces"][0]["FaceID"]}
+                    </td>
+                    <td className="text-sm text-center border-b border-black mx-2 p-2">
+                      {data["faces"][0]["Age"]}
+                    </td>
+                    <td className="text-sm text-center border-b border-black mx-2 p-2">
+                      {data["faces"][0]["Gender"]}
+                    </td>
+                    <td className="text-sm text-center border-b border-black mx-2 p-2">
+                      {data["faces"][0]["livenessScore"] > 0.75
+                        ? "Real"
+                        : "Fake"}
+                    </td>
                   </tr>
                 </tbody>
               </table>

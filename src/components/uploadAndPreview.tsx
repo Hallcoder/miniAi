@@ -10,7 +10,7 @@ import image4 from "../../public/assets/images/image4.jpg";
 import DropZone from "./DropZone";
 import ImageSamples from "./ImageSamples";
 
-const UploadAndPreview = ({ updateData, updateLoading }) => {
+const UploadAndPreview = ({ updateData, updateLoading, pageType }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -38,7 +38,7 @@ const UploadAndPreview = ({ updateData, updateLoading }) => {
     };
     const formData = new FormData();
     formData.append("file", selectedFile);
-    console.log(formData.getAll("file"));
+        
     axios
       .post(
         `${process.env.NEXT_PUBLIC_API_URL!}/idcard_recognition`,
@@ -77,7 +77,6 @@ const UploadAndPreview = ({ updateData, updateLoading }) => {
       <Toaster />
       <div className="w-11/12 h-full flex justify-center">
         <DropZone
-          constraintWidth={"w-10/12"}
           preview={preview}
           setSelectedFile={setSelectedFile}
           selectedFile={selectedFile}
@@ -152,6 +151,8 @@ const UploadAndPreview = ({ updateData, updateLoading }) => {
       )}
       </div>
       <ImageSamples
+        showText={true}
+        updateData={updateData}
         images={images}
         setPreview={setPreview}
         setSelectedFile={setSelectedFile}

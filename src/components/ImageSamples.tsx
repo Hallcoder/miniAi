@@ -2,8 +2,9 @@ import Image from "next/image";
 import toast from "react-hot-toast";
 import ServicesText from "./servicesText";
 
-function ImageSamples({ images, setPreview, setSelectedFile,showText }) {
+function ImageSamples({ images, setPreview, setSelectedFile,showText,updateData }) {
   const handleSampleClick = async (img) => {
+    updateData({});
     try {
       // Convert the imported image to a Data URL (base64)
       const toDataURL = (url) =>
